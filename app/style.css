@@ -40,3 +40,9 @@
   background-color: #c0ded9;
   text-align: center;
 }
+button {
+  margin-bottom: 30px;
+  background-color: whitesmoke;
+  font-size: 20px;
+  border-radius: 12px;
+}

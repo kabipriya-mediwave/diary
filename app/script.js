@@ -35,6 +35,8 @@ function updatediaryListUI() {
     const diaryDiv = makediaryDiv(myNotes[i]);
     const diaryApp = document.querySelector("#app");
     diaryApp.appendChild(diaryDiv);
+    const totalcount = document.querySelector("#value");
+    totalcount.innerText = myNotes.length;
   }
 }
 function adddiary(diary) {
@@ -58,6 +60,7 @@ function hookForm() {
     adddiary(diary);
   });
 }
+
 function saveToLocalStorage() {
   const str = JSON.stringify(myNotes);
   localStorage.setItem("my-diary-list", str);
