@@ -1,4 +1,4 @@
-let myNotes = [{}];
+let myNotes = [];
 function makediaryDiv(diary) {
   const div = document.createElement("div");
   div.setAttribute("class", "diary-card");
@@ -31,16 +31,16 @@ function clearApp() {
 }
 function updatediaryListUI() {
   clearApp();
+  sortarray();
   for (let i = 0; i < myNotes.length; i++) {
     const diaryDiv = makediaryDiv(myNotes[i]);
     const diaryApp = document.querySelector("#app");
     diaryApp.appendChild(diaryDiv);
-    const totalcount = document.querySelector("#value");
-    totalcount.innerText = myNotes.length;
   }
 }
 function adddiary(diary) {
   myNotes.push(diary);
+  sortarray();
   updatediaryListUI();
   saveToLocalStorage();
 }
@@ -72,6 +72,11 @@ function getFromLocalStorage() {
   } else {
     myNotes = JSON.parse(str);
   }
+}
+function sortarray() {
+  myNotes.sort(function (a, b) {
+    return new Date(b.date) - new Date(a.date);
+  });
 }
 getFromLocalStorage();
 updatediaryListUI();
