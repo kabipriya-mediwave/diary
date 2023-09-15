@@ -4,7 +4,7 @@ function makediaryDiv(diary) {
   div.setAttribute("class", "diary-card");
   div.setAttribute("id", `diary-${diary.id}`);
   const h2 = document.createElement("h2");
-  h2.innerText = diary["date"];
+  h2.innerText = reversedate(diary["date"]);
   const h3 = document.createElement("h3");
   h3.innerText = diary["notes"];
   const deleteBtn = document.createElement("button");
@@ -24,6 +24,7 @@ function removediary(diaryId) {
   const filteredArray = myNotes.filter((diary) => diary.id != diaryId);
   myNotes = filteredArray;
   updatediaryListUI();
+  saveToLocalStorage();
 }
 function clearApp() {
   const app = document.querySelector("#app");
@@ -60,11 +61,11 @@ function hookForm() {
     adddiary(diary);
   });
 }
-
 function saveToLocalStorage() {
   const str = JSON.stringify(myNotes);
   localStorage.setItem("my-diary-list", str);
 }
+
 function getFromLocalStorage() {
   const str = localStorage.getItem("my-diary-list");
   if (!str) {
@@ -78,6 +79,11 @@ function sortarray() {
     return new Date(b.date) - new Date(a.date);
   });
 }
+function reversedate(formDate) {
+  let d = formDate.split("-").reverse().join("-");
+  return d;
+}
+
 getFromLocalStorage();
 updatediaryListUI();
 hookForm();
